@@ -14,13 +14,417 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      assets: {
+        Row: {
+          condition: string
+          created_at: string
+          id: string
+          location: string | null
+          name: string
+          qty: number
+        }
+        Insert: {
+          condition?: string
+          created_at?: string
+          id?: string
+          location?: string | null
+          name: string
+          qty?: number
+        }
+        Update: {
+          condition?: string
+          created_at?: string
+          id?: string
+          location?: string | null
+          name?: string
+          qty?: number
+        }
+        Relationships: []
+      }
+      audit_logs: {
+        Row: {
+          action: string
+          created_at: string
+          detail: string | null
+          id: string
+          user_email: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          detail?: string | null
+          id?: string
+          user_email?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          detail?: string | null
+          id?: string
+          user_email?: string | null
+        }
+        Relationships: []
+      }
+      bulk_liquids: {
+        Row: {
+          formula_id: string
+          min_ml: number
+          volume_ml: number
+        }
+        Insert: {
+          formula_id: string
+          min_ml?: number
+          volume_ml?: number
+        }
+        Update: {
+          formula_id?: string
+          min_ml?: number
+          volume_ml?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bulk_liquids_formula_id_fkey"
+            columns: ["formula_id"]
+            isOneToOne: true
+            referencedRelation: "formulas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bulk_productions: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          formula_id: string
+          id: string
+          volume_ml: number
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          formula_id: string
+          id?: string
+          volume_ml: number
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          formula_id?: string
+          id?: string
+          volume_ml?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bulk_productions_formula_id_fkey"
+            columns: ["formula_id"]
+            isOneToOne: false
+            referencedRelation: "formulas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      formula_items: {
+        Row: {
+          formula_id: string
+          id: string
+          material_id: string
+          qty_per_100ml: number
+        }
+        Insert: {
+          formula_id: string
+          id?: string
+          material_id: string
+          qty_per_100ml: number
+        }
+        Update: {
+          formula_id?: string
+          id?: string
+          material_id?: string
+          qty_per_100ml?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "formula_items_formula_id_fkey"
+            columns: ["formula_id"]
+            isOneToOne: false
+            referencedRelation: "formulas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "formula_items_material_id_fkey"
+            columns: ["material_id"]
+            isOneToOne: false
+            referencedRelation: "materials"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      formulas: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          notes: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          notes?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          notes?: string | null
+        }
+        Relationships: []
+      }
+      materials: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          min_stock: number
+          name: string
+          stock: number
+          unit: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          id?: string
+          min_stock?: number
+          name: string
+          stock?: number
+          unit?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          min_stock?: number
+          name?: string
+          stock?: number
+          unit?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          bottle_material_id: string | null
+          created_at: string
+          formula_id: string
+          id: string
+          min_stock: number
+          name: string
+          size_ml: number
+          stock: number
+        }
+        Insert: {
+          bottle_material_id?: string | null
+          created_at?: string
+          formula_id: string
+          id?: string
+          min_stock?: number
+          name: string
+          size_ml: number
+          stock?: number
+        }
+        Update: {
+          bottle_material_id?: string | null
+          created_at?: string
+          formula_id?: string
+          id?: string
+          min_stock?: number
+          name?: string
+          size_ml?: number
+          stock?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_bottle_material_id_fkey"
+            columns: ["bottle_material_id"]
+            isOneToOne: false
+            referencedRelation: "materials"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "products_formula_id_fkey"
+            columns: ["formula_id"]
+            isOneToOne: false
+            referencedRelation: "formulas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      purchases: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          material_id: string
+          qty: number
+          supplier: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          material_id: string
+          qty: number
+          supplier?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          material_id?: string
+          qty?: number
+          supplier?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "purchases_material_id_fkey"
+            columns: ["material_id"]
+            isOneToOne: false
+            referencedRelation: "materials"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      repacks: {
+        Row: {
+          bulk_used_ml: number
+          created_at: string
+          created_by: string | null
+          id: string
+          product_id: string
+          qty: number
+        }
+        Insert: {
+          bulk_used_ml: number
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          product_id: string
+          qty: number
+        }
+        Update: {
+          bulk_used_ml?: number
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          product_id?: string
+          qty?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "repacks_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sales_items: {
+        Row: {
+          id: string
+          order_id: string
+          product_id: string
+          qty: number
+        }
+        Insert: {
+          id?: string
+          order_id: string
+          product_id: string
+          qty: number
+        }
+        Update: {
+          id?: string
+          order_id?: string
+          product_id?: string
+          qty?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sales_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "sales_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sales_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sales_orders: {
+        Row: {
+          channel: string
+          created_at: string
+          created_by: string | null
+          customer: string | null
+          id: string
+          status: string
+        }
+        Insert: {
+          channel: string
+          created_at?: string
+          created_by?: string | null
+          customer?: string | null
+          id?: string
+          status?: string
+        }
+        Update: {
+          channel?: string
+          created_at?: string
+          created_by?: string | null
+          customer?: string | null
+          id?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_sale: {
+        Args: {
+          _channel: string
+          _customer: string
+          _items: Json
+          _status: string
+        }
+        Returns: string
+      }
+      log_action: {
+        Args: { _action: string; _detail: string }
+        Returns: undefined
+      }
+      produce_bulk: {
+        Args: { _formula: string; _volume: number }
+        Returns: undefined
+      }
+      receive_purchase: {
+        Args: { _material: string; _qty: number; _supplier: string }
+        Returns: undefined
+      }
+      repack_product: {
+        Args: { _product: string; _qty: number }
+        Returns: undefined
+      }
+      set_sale_status: {
+        Args: { _order: string; _status: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
