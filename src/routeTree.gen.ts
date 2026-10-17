@@ -10,33 +10,83 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as JualRouteImport } from './routes/jual'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as MenuRouteImport } from './routes/menu'
+import { Route as ProduksiRouteImport } from './routes/produksi'
+import { Route as StokRouteImport } from './routes/stok'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JualRoute = JualRouteImport.update({
+  id: '/jual',
+  path: '/jual',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuRoute = MenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProduksiRoute = ProduksiRouteImport.update({
+  id: '/produksi',
+  path: '/produksi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StokRoute = StokRouteImport.update({
+  id: '/stok',
+  path: '/stok',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/jual': typeof JualRoute
+  '/login': typeof LoginRoute
+  '/menu': typeof MenuRoute
+  '/produksi': typeof ProduksiRoute
+  '/stok': typeof StokRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/jual': typeof JualRoute
+  '/login': typeof LoginRoute
+  '/menu': typeof MenuRoute
+  '/produksi': typeof ProduksiRoute
+  '/stok': typeof StokRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/jual': typeof JualRoute
+  '/login': typeof LoginRoute
+  '/menu': typeof MenuRoute
+  '/produksi': typeof ProduksiRoute
+  '/stok': typeof StokRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/jual' | '/login' | '/menu' | '/produksi' | '/stok'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/jual' | '/login' | '/menu' | '/produksi' | '/stok'
+  id: '__root__' | '/' | '/jual' | '/login' | '/menu' | '/produksi' | '/stok'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  JualRoute: typeof JualRoute
+  LoginRoute: typeof LoginRoute
+  MenuRoute: typeof MenuRoute
+  ProduksiRoute: typeof ProduksiRoute
+  StokRoute: typeof StokRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +98,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/jual': {
+      id: '/jual'
+      path: '/jual'
+      fullPath: '/jual'
+      preLoaderRoute: typeof JualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu': {
+      id: '/menu'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof MenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produksi': {
+      id: '/produksi'
+      path: '/produksi'
+      fullPath: '/produksi'
+      preLoaderRoute: typeof ProduksiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stok': {
+      id: '/stok'
+      path: '/stok'
+      fullPath: '/stok'
+      preLoaderRoute: typeof StokRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  JualRoute: JualRoute,
+  LoginRoute: LoginRoute,
+  MenuRoute: MenuRoute,
+  ProduksiRoute: ProduksiRoute,
+  StokRoute: StokRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
