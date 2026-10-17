@@ -29,14 +29,14 @@ function Menu() {
       <ul className="space-y-4">
         {items.map((i) => (
           <li key={i.label}>
-            <button className="neu neu-press flex w-full items-center gap-4 rounded-3xl p-4 text-left">
+            <div aria-disabled="true" className="neu flex w-full items-center gap-4 rounded-3xl p-4 text-left opacity-80">
               <IconBubble icon={i.icon} />
               <span className="min-w-0 flex-1">
                 <span className="block truncate font-bold">{i.label}</span>
                 <span className="block truncate text-xs text-muted-foreground">{i.desc}</span>
               </span>
-              <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" />
-            </button>
+              <span className="neu-inset shrink-0 rounded-full px-3 py-1 text-[10px] font-bold text-muted-foreground">Segera</span>
+            </div>
           </li>
         ))}
         <li>

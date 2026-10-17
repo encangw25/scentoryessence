@@ -17,9 +17,10 @@ export const Route = createFileRoute("/login")({
 
 function Login() {
   const [show, setShow] = useState(false);
+  const [msg, setMsg] = useState("");
   return (
     <main className="grid min-h-screen place-items-center px-5 py-10">
-      <form onSubmit={(e) => e.preventDefault()} className="neu w-full max-w-sm rounded-[2.5rem] px-7 py-10">
+      <form onSubmit={(e) => { e.preventDefault(); setMsg("Login belum aktif — sistem akun sedang disiapkan."); }} className="neu w-full max-w-sm rounded-[2.5rem] px-7 py-10">
         <div className="flex flex-col items-center text-center">
           <IconBubble icon={Lock} className="h-20 w-20 text-secondary" />
           <h1 className="mt-6 text-3xl font-extrabold">Welcome</h1>
@@ -44,6 +45,7 @@ function Login() {
           <button type="submit" className="neu neu-press min-h-14 w-full rounded-2xl font-extrabold tracking-widest text-primary">
             LOGIN
           </button>
+          {msg && <p role="status" className="neu-inset rounded-2xl p-3 text-center text-xs text-low">{msg}</p>}
           <Link to="/" className="block text-center text-xs text-muted-foreground">Kembali ke beranda</Link>
         </div>
       </form>
