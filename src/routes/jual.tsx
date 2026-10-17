@@ -130,13 +130,16 @@ function OrderForm({ onDone }: { onDone: () => void }) {
     "Order tersimpan",
   );
   const parsed = items.filter((i) => i.product_id).map((i) => ({ product_id: i.product_id, qty: Math.floor(Number(i.qty)) }));
-  const errors = parsed.map((i) => {
-    const p = prods.data?.find((x) => x.id === i.product_id);
-    if (!(i.qty > 0)) return "Jumlah harus lebih dari 0";
-    const total = parsed.filter((x) => x.product_id === i.product_id).reduce((s, x) => s + x.qty, 0);
+  const rowError = (it: { product_id: string; qty: string }) => {
+    if (!it.product_id) return "";
+    const q = Math.floor(Number(it.qty));
+    if (!(q > 0)) return "Jumlah harus lebih dari 0";
+    const p = prods.data?.find((x) => x.id === it.product_id);
+    const total = parsed.filter((x) => x.product_id === it.product_id).reduce((s, x) => s + x.qty, 0);
     if (status !== "cancelled" && p && total > p.stock) return `Stok tidak cukup (tersedia ${p.stock})`;
     return "";
-  });
+  };
+  const errors = items.map(rowError);
   const valid = parsed.length > 0 && errors.every((e) => !e);
 
   if (!prods.isLoading && !prods.data?.length)
@@ -166,9 +169,7 @@ function OrderForm({ onDone }: { onDone: () => void }) {
               <input aria-label="Jumlah" type="number" inputMode="numeric" min={1} value={it.qty} onChange={(e) => setItems(items.map((x, i) => (i === idx ? { ...x, qty: e.target.value } : x)))} className={neuInput} />
               <button type="button" aria-label="Hapus baris" disabled={items.length === 1} onClick={() => setItems(items.filter((_, i) => i !== idx))} className="neu-sm neu-press grid h-12 w-12 place-items-center rounded-2xl text-critical disabled:opacity-40"><Trash2 className="h-4 w-4" /></button>
             </div>
-            {it.product_id && errors[parsed.findIndex((p) => p === parsed.filter((x) => x.product_id).find((_, j) => j === items.slice(0, idx + 1).filter((x) => x.product_id).length - 1))] && (
-              <p className="px-1 text-xs font-semibold text-critical">{errors[items.slice(0, idx + 1).filter((x) => x.product_id).length - 1]}</p>
-            )}
+            {errors[idx] && <p className="px-1 text-xs font-semibold text-critical">{errors[idx]}</p>}
           </div>
         ))}
         <Btn type="button" variant="ghost" className="w-full" onClick={() => setItems([...items, { product_id: "", qty: "1" }])}>+ Tambah produk</Btn>
