@@ -12,7 +12,10 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { BottomNav } from "@/components/neu";
+import { BottomNav, Loading } from "@/components/neu";
+import { AuthProvider, useAuth } from "@/lib/auth";
+import { Toaster } from "@/components/ui/sonner";
+import { Navigate, useRouterState } from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -123,8 +126,24 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <AuthProvider>
+        <Gate />
+      </AuthProvider>
+      <Toaster position="top-center" richColors />
+    </QueryClientProvider>
+  );
+}
+
+function Gate() {
+  const { session, ready } = useAuth();
+  const path = useRouterState({ select: (r) => r.location.pathname });
+  if (path === "/login") return <Outlet />;
+  if (!ready) return <Loading />;
+  if (!session) return <Navigate to="/login" />;
+  return (
+    <>
       <Outlet />
       <BottomNav />
-    </QueryClientProvider>
+    </>
   );
 }
