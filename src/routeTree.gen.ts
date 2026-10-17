@@ -10,9 +10,16 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AsetRouteImport } from './routes/aset'
+import { Route as FormulaRouteImport } from './routes/formula'
 import { Route as JualRouteImport } from './routes/jual'
+import { Route as LaporanRouteImport } from './routes/laporan'
+import { Route as LogRouteImport } from './routes/log'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MaterialRouteImport } from './routes/material'
 import { Route as MenuRouteImport } from './routes/menu'
+import { Route as PembelianRouteImport } from './routes/pembelian'
+import { Route as ProdukRouteImport } from './routes/produk'
 import { Route as ProduksiRouteImport } from './routes/produksi'
 import { Route as StokRouteImport } from './routes/stok'
 
@@ -21,9 +28,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AsetRoute = AsetRouteImport.update({
+  id: '/aset',
+  path: '/aset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormulaRoute = FormulaRouteImport.update({
+  id: '/formula',
+  path: '/formula',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JualRoute = JualRouteImport.update({
   id: '/jual',
   path: '/jual',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaporanRoute = LaporanRouteImport.update({
+  id: '/laporan',
+  path: '/laporan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogRoute = LogRouteImport.update({
+  id: '/log',
+  path: '/log',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -31,9 +58,24 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MaterialRoute = MaterialRouteImport.update({
+  id: '/material',
+  path: '/material',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MenuRoute = MenuRouteImport.update({
   id: '/menu',
   path: '/menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PembelianRoute = PembelianRouteImport.update({
+  id: '/pembelian',
+  path: '/pembelian',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukRoute = ProdukRouteImport.update({
+  id: '/produk',
+  path: '/produk',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProduksiRoute = ProduksiRouteImport.update({
@@ -49,42 +91,110 @@ const StokRoute = StokRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aset': typeof AsetRoute
+  '/formula': typeof FormulaRoute
   '/jual': typeof JualRoute
+  '/laporan': typeof LaporanRoute
+  '/log': typeof LogRoute
   '/login': typeof LoginRoute
+  '/material': typeof MaterialRoute
   '/menu': typeof MenuRoute
+  '/pembelian': typeof PembelianRoute
+  '/produk': typeof ProdukRoute
   '/produksi': typeof ProduksiRoute
   '/stok': typeof StokRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aset': typeof AsetRoute
+  '/formula': typeof FormulaRoute
   '/jual': typeof JualRoute
+  '/laporan': typeof LaporanRoute
+  '/log': typeof LogRoute
   '/login': typeof LoginRoute
+  '/material': typeof MaterialRoute
   '/menu': typeof MenuRoute
+  '/pembelian': typeof PembelianRoute
+  '/produk': typeof ProdukRoute
   '/produksi': typeof ProduksiRoute
   '/stok': typeof StokRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aset': typeof AsetRoute
+  '/formula': typeof FormulaRoute
   '/jual': typeof JualRoute
+  '/laporan': typeof LaporanRoute
+  '/log': typeof LogRoute
   '/login': typeof LoginRoute
+  '/material': typeof MaterialRoute
   '/menu': typeof MenuRoute
+  '/pembelian': typeof PembelianRoute
+  '/produk': typeof ProdukRoute
   '/produksi': typeof ProduksiRoute
   '/stok': typeof StokRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/jual' | '/login' | '/menu' | '/produksi' | '/stok'
+  fullPaths:
+    | '/'
+    | '/aset'
+    | '/formula'
+    | '/jual'
+    | '/laporan'
+    | '/log'
+    | '/login'
+    | '/material'
+    | '/menu'
+    | '/pembelian'
+    | '/produk'
+    | '/produksi'
+    | '/stok'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/jual' | '/login' | '/menu' | '/produksi' | '/stok'
-  id: '__root__' | '/' | '/jual' | '/login' | '/menu' | '/produksi' | '/stok'
+  to:
+    | '/'
+    | '/aset'
+    | '/formula'
+    | '/jual'
+    | '/laporan'
+    | '/log'
+    | '/login'
+    | '/material'
+    | '/menu'
+    | '/pembelian'
+    | '/produk'
+    | '/produksi'
+    | '/stok'
+  id:
+    | '__root__'
+    | '/'
+    | '/aset'
+    | '/formula'
+    | '/jual'
+    | '/laporan'
+    | '/log'
+    | '/login'
+    | '/material'
+    | '/menu'
+    | '/pembelian'
+    | '/produk'
+    | '/produksi'
+    | '/stok'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AsetRoute: typeof AsetRoute
+  FormulaRoute: typeof FormulaRoute
   JualRoute: typeof JualRoute
+  LaporanRoute: typeof LaporanRoute
+  LogRoute: typeof LogRoute
   LoginRoute: typeof LoginRoute
+  MaterialRoute: typeof MaterialRoute
   MenuRoute: typeof MenuRoute
+  PembelianRoute: typeof PembelianRoute
+  ProdukRoute: typeof ProdukRoute
   ProduksiRoute: typeof ProduksiRoute
   StokRoute: typeof StokRoute
 }
@@ -98,11 +208,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aset': {
+      id: '/aset'
+      path: '/aset'
+      fullPath: '/aset'
+      preLoaderRoute: typeof AsetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/formula': {
+      id: '/formula'
+      path: '/formula'
+      fullPath: '/formula'
+      preLoaderRoute: typeof FormulaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/jual': {
       id: '/jual'
       path: '/jual'
       fullPath: '/jual'
       preLoaderRoute: typeof JualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laporan': {
+      id: '/laporan'
+      path: '/laporan'
+      fullPath: '/laporan'
+      preLoaderRoute: typeof LaporanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/log': {
+      id: '/log'
+      path: '/log'
+      fullPath: '/log'
+      preLoaderRoute: typeof LogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -112,11 +250,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/material': {
+      id: '/material'
+      path: '/material'
+      fullPath: '/material'
+      preLoaderRoute: typeof MaterialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/menu': {
       id: '/menu'
       path: '/menu'
       fullPath: '/menu'
       preLoaderRoute: typeof MenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pembelian': {
+      id: '/pembelian'
+      path: '/pembelian'
+      fullPath: '/pembelian'
+      preLoaderRoute: typeof PembelianRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produk': {
+      id: '/produk'
+      path: '/produk'
+      fullPath: '/produk'
+      preLoaderRoute: typeof ProdukRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/produksi': {
@@ -138,9 +297,16 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AsetRoute: AsetRoute,
+  FormulaRoute: FormulaRoute,
   JualRoute: JualRoute,
+  LaporanRoute: LaporanRoute,
+  LogRoute: LogRoute,
   LoginRoute: LoginRoute,
+  MaterialRoute: MaterialRoute,
   MenuRoute: MenuRoute,
+  PembelianRoute: PembelianRoute,
+  ProdukRoute: ProdukRoute,
   ProduksiRoute: ProduksiRoute,
   StokRoute: StokRoute,
 }
