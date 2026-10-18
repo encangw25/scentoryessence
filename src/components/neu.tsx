@@ -163,7 +163,7 @@ export function Btn({ className, variant = "primary", ...p }: ButtonHTMLAttribut
   );
 }
 
-export function Field({ label, children, hint }: { label: string; children: ReactNode; hint?: string }) {
+export function Field({ label, children, hint }: { label: string; children: ReactNode; hint?: string | undefined }) {
   return (
     <label className="block space-y-2">
       <span className="px-1 text-sm font-semibold">{label}</span>
