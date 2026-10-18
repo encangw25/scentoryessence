@@ -1,4 +1,5 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Outlet,
   Link,
@@ -140,6 +141,30 @@ function Gate() {
   if (path === "/login") return <Outlet />;
   if (!ready) return <Loading />;
   if (!session) return <Navigate to="/login" />;
+  return <StaffGate />;
+}
+
+function StaffGate() {
+  const { session } = useAuth();
+  const q = useQuery({
+    queryKey: ["is-staff", session?.user.id],
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("claim_first_staff");
+      if (error) throw new Error(error.message);
+      return data;
+    },
+  });
+  if (q.isLoading) return <Loading />;
+  if (!q.data)
+    return (
+      <main className="grid min-h-screen place-items-center px-5">
+        <div className="neu max-w-sm space-y-4 rounded-[2rem] p-8 text-center">
+          <h1 className="text-xl font-extrabold">Akun belum terdaftar</h1>
+          <p className="text-sm text-muted-foreground">{session?.user.email} belum didaftarkan sebagai staf. Minta Owner menambahkan email ini di Menu → Staf.</p>
+          <button onClick={() => supabase.auth.signOut()} className="neu neu-press min-h-12 w-full rounded-2xl font-bold text-critical">Keluar</button>
+        </div>
+      </main>
+    );
   return (
     <>
       <Outlet />

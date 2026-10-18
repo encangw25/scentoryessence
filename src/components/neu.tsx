@@ -14,7 +14,7 @@ const tabs = [
   { to: "/jual", label: "Jual", icon: ShoppingBag },
   { to: "/menu", label: "Menu", icon: LayoutGrid },
 ] as const;
-const menuPaths = ["/menu", "/material", "/formula", "/produk", "/pembelian", "/aset", "/laporan", "/log"];
+const menuPaths = ["/menu", "/material", "/formula", "/produk", "/pembelian", "/aset", "/laporan", "/log", "/staf"];
 
 export function BottomNav() {
   const path = useRouterState({ select: (r) => r.location.pathname });

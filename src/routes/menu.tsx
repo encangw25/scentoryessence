@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Beaker, BookOpen, Truck, Wrench, BarChart3, History, Package, LogOut, ChevronRight, UserCircle } from "lucide-react";
+import { Beaker, BookOpen, Truck, Wrench, BarChart3, History, Package, LogOut, ChevronRight, UserCircle, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { Page, IconBubble, Card } from "@/components/neu";
@@ -24,6 +24,7 @@ const items = [
   { to: "/aset", label: "Manajemen Aset", desc: "Peralatan operasional", icon: Wrench },
   { to: "/laporan", label: "Laporan Operasional", desc: "Ringkasan 30 hari", icon: BarChart3 },
   { to: "/log", label: "Log Aktivitas", desc: "Audit log", icon: History },
+  { to: "/staf", label: "Staf", desc: "Email yang boleh mengakses", icon: Users },
 ] as const;
 
 function Menu() {
