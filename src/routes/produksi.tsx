@@ -6,7 +6,7 @@ import { useFormulas, useBulk, useProducts, useMaterials, useProductions, useAct
 
 type Tab = "bulk" | "repack";
 export const Route = createFileRoute("/produksi")({
-  validateSearch: (s: Record<string, unknown>): { tab?: Tab } => ({ tab: s.tab === "repack" ? "repack" : s.tab === "bulk" ? "bulk" : undefined }),
+  validateSearch: (s: Record<string, unknown>): { tab?: Tab | undefined } => ({ tab: s["tab"] === "repack" ? "repack" : s["tab"] === "bulk" ? "bulk" : undefined }),
   head: () => ({
     meta: [
       { title: "Produksi — Scentory Essence" },
@@ -29,7 +29,7 @@ function Produksi() {
       <div>
         <SectionTitle>Riwayat {tab === "bulk" ? "batch" : "repack"}</SectionTitle>
         <QueryView
-          q={{ data: tab === "bulk" ? hist.data?.bulk : hist.data?.repack, isLoading: hist.isLoading, error: hist.error }}
+          q={{ data: (tab === "bulk" ? hist.data?.bulk : hist.data?.repack) as any[] | undefined, isLoading: hist.isLoading, error: hist.error }}
           empty={["Belum ada riwayat", "Transaksi tersimpan akan muncul di sini."]}
         >
           {(d) => (
