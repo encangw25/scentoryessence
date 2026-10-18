@@ -391,11 +391,30 @@ export type Database = {
         }
         Relationships: []
       }
+      staff_members: {
+        Row: {
+          added_by: string | null
+          created_at: string
+          email: string
+        }
+        Insert: {
+          added_by?: string | null
+          created_at?: string
+          email: string
+        }
+        Update: {
+          added_by?: string | null
+          created_at?: string
+          email?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      claim_first_staff: { Args: never; Returns: boolean }
       create_sale: {
         Args: {
           _channel: string
@@ -405,6 +424,7 @@ export type Database = {
         }
         Returns: string
       }
+      is_staff: { Args: never; Returns: boolean }
       log_action: {
         Args: { _action: string; _detail: string }
         Returns: undefined
