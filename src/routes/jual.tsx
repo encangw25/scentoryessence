@@ -7,7 +7,7 @@ import { useOrders, useProducts, useAction, fmt, fmtDate } from "@/lib/db";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/jual")({
-  validateSearch: (s: Record<string, unknown>): { baru?: boolean } => ({ baru: s.baru === true || s.baru === "true" ? true : undefined }),
+  validateSearch: (s: Record<string, unknown>): { baru?: boolean | undefined } => ({ baru: s["baru"] === true || s["baru"] === "true" ? true : undefined }),
   head: () => ({
     meta: [
       { title: "Jual — Scentory Essence" },
