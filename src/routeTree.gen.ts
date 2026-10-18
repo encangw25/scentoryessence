@@ -21,6 +21,7 @@ import { Route as MenuRouteImport } from './routes/menu'
 import { Route as PembelianRouteImport } from './routes/pembelian'
 import { Route as ProdukRouteImport } from './routes/produk'
 import { Route as ProduksiRouteImport } from './routes/produksi'
+import { Route as StafRouteImport } from './routes/staf'
 import { Route as StokRouteImport } from './routes/stok'
 
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +84,11 @@ const ProduksiRoute = ProduksiRouteImport.update({
   path: '/produksi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StafRoute = StafRouteImport.update({
+  id: '/staf',
+  path: '/staf',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StokRoute = StokRouteImport.update({
   id: '/stok',
   path: '/stok',
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/pembelian': typeof PembelianRoute
   '/produk': typeof ProdukRoute
   '/produksi': typeof ProduksiRoute
+  '/staf': typeof StafRoute
   '/stok': typeof StokRoute
 }
 export interface FileRoutesByTo {
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/pembelian': typeof PembelianRoute
   '/produk': typeof ProdukRoute
   '/produksi': typeof ProduksiRoute
+  '/staf': typeof StafRoute
   '/stok': typeof StokRoute
 }
 export interface FileRoutesById {
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/pembelian': typeof PembelianRoute
   '/produk': typeof ProdukRoute
   '/produksi': typeof ProduksiRoute
+  '/staf': typeof StafRoute
   '/stok': typeof StokRoute
 }
 export interface FileRouteTypes {
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/pembelian'
     | '/produk'
     | '/produksi'
+    | '/staf'
     | '/stok'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/pembelian'
     | '/produk'
     | '/produksi'
+    | '/staf'
     | '/stok'
   id:
     | '__root__'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/pembelian'
     | '/produk'
     | '/produksi'
+    | '/staf'
     | '/stok'
   fileRoutesById: FileRoutesById
 }
@@ -196,6 +208,7 @@ export interface RootRouteChildren {
   PembelianRoute: typeof PembelianRoute
   ProdukRoute: typeof ProdukRoute
   ProduksiRoute: typeof ProduksiRoute
+  StafRoute: typeof StafRoute
   StokRoute: typeof StokRoute
 }
 
@@ -285,6 +298,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProduksiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/staf': {
+      id: '/staf'
+      path: '/staf'
+      fullPath: '/staf'
+      preLoaderRoute: typeof StafRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/stok': {
       id: '/stok'
       path: '/stok'
@@ -308,6 +328,7 @@ const rootRouteChildren: RootRouteChildren = {
   PembelianRoute: PembelianRoute,
   ProdukRoute: ProdukRoute,
   ProduksiRoute: ProduksiRoute,
+  StafRoute: StafRoute,
   StokRoute: StokRoute,
 }
 export const routeTree = rootRouteImport
