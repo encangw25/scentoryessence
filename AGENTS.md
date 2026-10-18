@@ -12,3 +12,4 @@
 - Stock-changing transactions (bulk production, repack, purchases, sales, order status) run only through Postgres RPC functions (`produce_bulk`, `repack_product`, `receive_purchase`, `create_sale`, `set_sale_status`) — they validate and update stock atomically and write audit_logs.
 - All UI primitives (neumorphic cards, inputs, tabs, badges, bottom nav) live in `src/components/neu.tsx`; tokens and `neu*` utilities in `src/styles.css` — keeps styling in one place so the design can be restyled or mocked up easily.
 - Auth gate is client-side in `__root.tsx` (`Gate`) because the session lives in browser storage; `/login` is the only public route.
+- Data access is gated by `is_staff()` (email allowlist in `staff_members`); the first signed-in account claims the store via `claim_first_staff()` — prevents any self-registered account from reading store data.
